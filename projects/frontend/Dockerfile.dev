@@ -1,0 +1,6 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN npm install -g npm
+RUN npm install -g @angular/cli@17

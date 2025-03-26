@@ -1,0 +1,10 @@
+include:
+  - projects/backend/docker-compose.yml
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
