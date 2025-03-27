@@ -4,6 +4,14 @@
     "es2021": true,
     "mocha": true
   },
+  "globals": {
+    "before": "readonly",
+    "after": "readonly",
+    "beforeEach": "readonly",
+    "afterEach": "readonly",
+    "describe": "readonly",
+    "it": "readonly"
+  },
   "extends": [
     "eslint:recommended",
     "plugin:prettier/recommended"

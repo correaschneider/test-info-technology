@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "Tracking Vehicle",
   "main": "src/index.js",
+  "type": "commonjs",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "mocha --require src/tests/setup.js src/tests/**/*.test.js --exit",
-    "test:watch": "mocha --require src/tests/setup.js src/tests/**/*.test.js --watch --exit",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "mocha --file src/tests/setup.js src/tests/**/*.test.js --exit",
+    "test:watch": "mocha --file src/tests/setup.js src/tests/**/*.test.js --watch --exit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -16,7 +17,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^6.5.0",
     "cors": "^2.8.5",
@@ -24,7 +24,7 @@
     "prisma": "^6.5.0"
   },
   "devDependencies": {
-    "chai": "^5.2.0",
+    "chai": "^4.3.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

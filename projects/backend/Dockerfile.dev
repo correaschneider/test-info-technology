@@ -4,3 +4,5 @@ WORKDIR /app
 
 RUN npm install -g npm
 RUN npm install -g nodemon
+
+CMD ["npm", "run", "dev"]
