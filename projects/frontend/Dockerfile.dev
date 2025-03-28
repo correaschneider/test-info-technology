@@ -4,3 +4,7 @@ WORKDIR /app
 
 RUN npm install -g npm
 RUN npm install -g @angular/cli@17
+
+EXPOSE 4200
+
+CMD ["npm", "run", "start"]
