@@ -1,5 +1,6 @@
 include:
   - projects/backend/docker-compose.yml
+  - projects/frontend/docker-compose.yml
 
 services:
   proxy:
