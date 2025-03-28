@@ -28,7 +28,7 @@ import { RouterModule } from '@angular/router';
         <mat-nav-list>
           <a mat-list-item routerLink="/brands">
             <mat-icon matListItemIcon>directions_car</mat-icon>
-            <span matListItemTitle>Marcas</span>
+            <span matListItemTitle>Veículos</span>
           </a>
           <!-- Add more menu items here -->
         </mat-nav-list>
