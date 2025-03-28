@@ -1,3 +1,4 @@
+const { convertBigIntToString } = require('../utils/vehicleTransform');
 class VehicleController {
   constructor() {
     // Empty constructor, service will be injected from request
@@ -6,7 +7,7 @@ class VehicleController {
   async create(req, res, next) {
     try {
       const vehicle = await req.service.create(req.body);
-      return res.status(201).json(vehicle);
+      return res.status(201).json(convertBigIntToString(vehicle));
     } catch (error) {
       next(error);
     }
@@ -15,7 +16,7 @@ class VehicleController {
   async findAll(req, res, next) {
     try {
       const vehicles = await req.service.findAll();
-      return res.json(vehicles);
+      return res.json(convertBigIntToString(vehicles));
     } catch (error) {
       next(error);
     }
@@ -24,7 +25,7 @@ class VehicleController {
   async findById(req, res, next) {
     try {
       const vehicle = await req.service.findById(req.params.id);
-      return res.json(vehicle);
+      return res.json(convertBigIntToString(vehicle));
     } catch (error) {
       next(error);
     }
@@ -33,7 +34,7 @@ class VehicleController {
   async update(req, res, next) {
     try {
       const vehicle = await req.service.update(req.params.id, req.body);
-      return res.json(vehicle);
+      return res.json(convertBigIntToString(vehicle));
     } catch (error) {
       next(error);
     }

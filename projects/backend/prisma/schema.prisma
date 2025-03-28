@@ -11,7 +11,7 @@ model Vehicle {
     id      String @id @default(uuid())
     plate   String
     chassi  String
-    renavam String
+    renavam BigInt
     model   String
     brand   String
     year    Int

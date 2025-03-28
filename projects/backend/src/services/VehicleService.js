@@ -16,7 +16,7 @@ class VehicleService {
   async findById(id) {
     const data = await this.vehicleRepository.findById(id);
     if (!data) {
-      throw new AppError('Vehicle not found', 404);
+      throw new AppError('Veículo não encontrado', 404);
     }
 
     return data;

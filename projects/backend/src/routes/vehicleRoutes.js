@@ -2,7 +2,10 @@ const express = require('express');
 const VehicleService = require('../services/VehicleService');
 const VehicleController = require('../controllers/VehicleController');
 const injectRepositories = require('../middlewares/repositoryInjection');
-const { validateVehicleCreate } = require('../middlewares/vehicleValidation');
+const {
+  validateVehicleCreate,
+  validateVehicleUpdate,
+} = require('../middlewares/vehicleValidation');
 
 const router = express.Router();
 
@@ -28,7 +31,7 @@ router.get('/:id', (req, res, next) => {
   vehicleController.findById(req, res, next);
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', validateVehicleUpdate, (req, res, next) => {
   req.service = new VehicleService(req.vehicleRepository);
   vehicleController.update(req, res, next);
 });
