@@ -4,27 +4,6 @@ const app = require('../index');
 
 describe('Vehicle Routes', () => {
   let createdVehicleId;
-  let modelId;
-  let brandId;
-
-  // Create a model and brand for testing
-  before(async () => {
-    // Create a brand
-    const brandResponse = await request(app)
-      .post('/api/brands')
-      .send({ name: 'Test Brand for Vehicle' })
-      .expect(201);
-
-    brandId = brandResponse.body.id;
-
-    // Create a model
-    const modelResponse = await request(app)
-      .post('/api/models')
-      .send({ name: 'Test Model for Vehicle' })
-      .expect(201);
-
-    modelId = modelResponse.body.id;
-  });
 
   describe('POST /api/vehicles', () => {
     it('should create a new vehicle', async () => {
@@ -32,8 +11,8 @@ describe('Vehicle Routes', () => {
         plate: 'ABC1234',
         chassi: '12345678901234567',
         renavam: '12345678901',
-        modelId,
-        brandId,
+        model: 'Model 1',
+        brand: 'Brand 1',
         year: 2023,
       };
 
@@ -44,8 +23,8 @@ describe('Vehicle Routes', () => {
       expect(response.body.chassi).to.equal(vehicleData.chassi);
       expect(response.body.renavam).to.equal(vehicleData.renavam);
       expect(response.body.year).to.equal(vehicleData.year);
-      expect(response.body.modelId).to.equal(modelId);
-      expect(response.body.brandId).to.equal(brandId);
+      expect(response.body.model).to.equal(vehicleData.model);
+      expect(response.body.brand).to.equal(vehicleData.brand);
 
       createdVehicleId = response.body.id;
     });
@@ -58,36 +37,6 @@ describe('Vehicle Routes', () => {
       const response = await request(app).post('/api/vehicles').send(vehicleData).expect(400);
 
       expect(response.body.error).to.equal('Plate is required');
-    });
-
-    it('should return 404 when model is not found', async () => {
-      const vehicleData = {
-        plate: 'ABC1234',
-        chassi: '12345678901234567',
-        renavam: '12345678901',
-        modelId: 'non-existent-id',
-        brandId,
-        year: 2023,
-      };
-
-      const response = await request(app).post('/api/vehicles').send(vehicleData).expect(404);
-
-      expect(response.body.error).to.equal('Model not found');
-    });
-
-    it('should return 404 when brand is not found', async () => {
-      const vehicleData = {
-        plate: 'ABC1234',
-        chassi: '12345678901234567',
-        renavam: '12345678901',
-        modelId,
-        brandId: 'non-existent-id',
-        year: 2023,
-      };
-
-      const response = await request(app).post('/api/vehicles').send(vehicleData).expect(404);
-
-      expect(response.body.error).to.equal('Brand not found');
     });
   });
 
@@ -109,6 +58,8 @@ describe('Vehicle Routes', () => {
       expect(response.body).to.have.property('chassi', '12345678901234567');
       expect(response.body).to.have.property('renavam', '12345678901');
       expect(response.body).to.have.property('year', 2023);
+      expect(response.body).to.have.property('model', 'Model 1');
+      expect(response.body).to.have.property('brand', 'Brand 1');
     });
 
     it('should return 404 for non-existent vehicle', async () => {
@@ -124,6 +75,8 @@ describe('Vehicle Routes', () => {
       const updateData = {
         plate: 'XYZ9876',
         year: 2022,
+        model: 'Model 2',
+        brand: 'Brand 2',
       };
 
       const response = await request(app)
@@ -133,9 +86,8 @@ describe('Vehicle Routes', () => {
 
       expect(response.body.plate).to.equal(updateData.plate);
       expect(response.body.year).to.equal(updateData.year);
-      // Other fields should remain unchanged
-      expect(response.body.chassi).to.equal('12345678901234567');
-      expect(response.body.renavam).to.equal('12345678901');
+      expect(response.body.model).to.equal(updateData.model);
+      expect(response.body.brand).to.equal(updateData.brand);
     });
 
     it('should return 404 for non-existent vehicle', async () => {
@@ -151,39 +103,12 @@ describe('Vehicle Routes', () => {
 
       expect(response.body.error).to.equal('Vehicle not found');
     });
-
-    it('should return 404 when updated model is not found', async () => {
-      const updateData = {
-        modelId: 'non-existent-id',
-      };
-
-      const response = await request(app)
-        .put(`/api/vehicles/${createdVehicleId}`)
-        .send(updateData)
-        .expect(404);
-
-      expect(response.body.error).to.equal('Model not found');
-    });
-
-    it('should return 404 when updated brand is not found', async () => {
-      const updateData = {
-        brandId: 'non-existent-id',
-      };
-
-      const response = await request(app)
-        .put(`/api/vehicles/${createdVehicleId}`)
-        .send(updateData)
-        .expect(404);
-
-      expect(response.body.error).to.equal('Brand not found');
-    });
   });
 
   describe('DELETE /api/vehicles/:id', () => {
     it('should delete a vehicle', async () => {
       await request(app).delete(`/api/vehicles/${createdVehicleId}`).expect(204);
 
-      // Verify the vehicle was deleted
       const response = await request(app).get(`/api/vehicles/${createdVehicleId}`).expect(404);
 
       expect(response.body.error).to.equal('Vehicle not found');

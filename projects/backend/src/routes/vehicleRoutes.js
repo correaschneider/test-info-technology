@@ -14,27 +14,27 @@ const vehicleController = new VehicleController();
 
 // Routes
 router.post('/', validateVehicleCreate, (req, res, next) => {
-  req.service = new VehicleService(req.vehicleRepository, req.modelRepository, req.brandRepository);
+  req.service = new VehicleService(req.vehicleRepository);
   vehicleController.create(req, res, next);
 });
 
 router.get('/', (req, res, next) => {
-  req.service = new VehicleService(req.vehicleRepository, req.modelRepository, req.brandRepository);
+  req.service = new VehicleService(req.vehicleRepository);
   vehicleController.findAll(req, res, next);
 });
 
 router.get('/:id', (req, res, next) => {
-  req.service = new VehicleService(req.vehicleRepository, req.modelRepository, req.brandRepository);
+  req.service = new VehicleService(req.vehicleRepository);
   vehicleController.findById(req, res, next);
 });
 
 router.put('/:id', (req, res, next) => {
-  req.service = new VehicleService(req.vehicleRepository, req.modelRepository, req.brandRepository);
+  req.service = new VehicleService(req.vehicleRepository);
   vehicleController.update(req, res, next);
 });
 
 router.delete('/:id', (req, res, next) => {
-  req.service = new VehicleService(req.vehicleRepository, req.modelRepository, req.brandRepository);
+  req.service = new VehicleService(req.vehicleRepository);
   vehicleController.delete(req, res, next);
 });
 

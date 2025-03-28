@@ -1,25 +1,11 @@
 const AppError = require('../utils/AppError');
 
 class VehicleService {
-  constructor(vehicleRepository, modelRepository, brandRepository) {
+  constructor(vehicleRepository) {
     this.vehicleRepository = vehicleRepository;
-    this.modelRepository = modelRepository;
-    this.brandRepository = brandRepository;
   }
 
   async create(vehicleData) {
-    const { modelId, brandId } = vehicleData;
-
-    const model = await this.modelRepository.findById(modelId);
-    if (!model) {
-      throw new AppError('Model not found', 404);
-    }
-
-    const brand = await this.brandRepository.findById(brandId);
-    if (!brand) {
-      throw new AppError('Brand not found', 404);
-    }
-
     return this.vehicleRepository.create(vehicleData);
   }
 
@@ -38,22 +24,6 @@ class VehicleService {
 
   async update(id, vehicleData) {
     await this.findById(id);
-
-    const { modelId, brandId } = vehicleData;
-
-    if (modelId) {
-      const model = await this.modelRepository.findById(modelId);
-      if (!model) {
-        throw new AppError('Model not found', 404);
-      }
-    }
-
-    if (brandId) {
-      const brand = await this.brandRepository.findById(brandId);
-      if (!brand) {
-        throw new AppError('Brand not found', 404);
-      }
-    }
 
     return this.vehicleRepository.update(id, vehicleData);
   }

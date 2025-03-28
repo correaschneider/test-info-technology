@@ -7,31 +7,13 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Model {
-    id      String    @id @default(uuid())
-    name    String
-    Vehicle Vehicle[]
-
-    @@map("models")
-}
-
-model Brand {
-    id      String    @id @default(uuid())
-    name    String
-    Vehicle Vehicle[]
-
-    @@map("brands")
-}
-
 model Vehicle {
     id      String @id @default(uuid())
     plate   String
     chassi  String
     renavam String
-    model   Model  @relation(fields: [modelId], references: [id])
-    modelId String
-    brand   Brand  @relation(fields: [brandId], references: [id])
-    brandId String
+    model   String
+    brand   String
     year    Int
 
     @@map("vehicles")

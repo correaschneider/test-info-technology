@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const modelRoutes = require('./routes/modelRoutes');
-const brandRoutes = require('./routes/brandRoutes');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -11,8 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/models', modelRoutes);
-app.use('/api/brands', brandRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 
 // Error handler
