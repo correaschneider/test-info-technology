@@ -1,27 +1,97 @@
 # Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.14.
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 17.3.14.
 
-## Development server
+## Pré-requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js 20.x
+- npm (vem com o Node.js)
+- Angular CLI 17.x
+- Docker e Docker Compose (opcional, apenas para rodar com Docker)
 
-## Code scaffolding
+## Configuração do Ambiente
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone o repositório
+2. Navegue até a pasta do projeto:
+   ```bash
+   cd projects/frontend
+   ```
+3. Copie o arquivo de ambiente de exemplo:
+   ```bash
+   cp .env.example .env
+   ```
 
-## Build
+## Executando o Projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Sem Docker
 
-## Running unit tests
+1. Instale as dependências:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```bash
+   npm install
+   ```
 
-## Running end-to-end tests
+2. Inicie o servidor de desenvolvimento:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   npm start
+   ```
 
-## Further help
+3. Acesse a aplicação em `http://localhost:4200`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Com Docker
+
+1. Construa e inicie os containers:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+2. Acesse a aplicação em `http://localhost:4200`
+
+## Scripts Disponíveis
+
+- `npm run start`: Inicia o servidor de desenvolvimento
+- `npm run build`: Compila o projeto para produção
+- `npm run watch`: Compila o projeto em modo de desenvolvimento com watch mode
+- `npm run serve:ssr:frontend`: Executa a versão SSR (Server-Side Rendering) da aplicação
+
+## Estrutura do Projeto
+
+- `/src`: Código fonte da aplicação
+- `/src/app`: Componentes, serviços e módulos da aplicação
+- `/src/assets`: Arquivos estáticos (imagens, fontes, etc.)
+- `/src/environments`: Configurações de ambiente
+
+## Tecnologias Utilizadas
+
+- Angular 17
+- Angular Material
+- TypeScript
+- RxJS
+- Express (para SSR)
+
+## Desenvolvimento
+
+### Gerando Novos Componentes
+
+Para gerar novos componentes, use o Angular CLI:
+
+```bash
+ng generate component nome-do-componente
+```
+
+Você também pode gerar outros artefatos como:
+
+- Diretivas: `ng generate directive`
+- Pipes: `ng generate pipe`
+- Serviços: `ng generate service`
+- Classes: `ng generate class`
+- Guards: `ng generate guard`
+- Interfaces: `ng generate interface`
+- Enums: `ng generate enum`
+- Módulos: `ng generate module`
+
+## Ajuda Adicional
+
+Para mais informações sobre o Angular CLI, use `ng help` ou visite a [Documentação do Angular CLI](https://angular.io/cli).
