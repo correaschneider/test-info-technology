@@ -18,21 +18,33 @@ O projeto está organizado da seguinte forma:
 
 1. Clone o repositório:
 
-```bash
-git clone [URL_DO_REPOSITÓRIO]
-cd test-info-technology
-```
+   ```bash
+   git clone [URL_DO_REPOSITÓRIO]
+   cd test-info-technology
+   ```
 
-2. Inicie os containers usando Docker Compose:
+2. Antes de executar o projeto, é necessário configurar as variáveis de ambiente para o backend e frontend.
 
-```bash
-docker-compose up -d
-```
+   ```bash
+   cp projects/backend/.env.example projects/backend/.env
+   ```
 
-3. Acesse as aplicações:
+   ```bash
+   cp projects/frontend/.env.example projects/frontend/.env
+   ```
 
-- Frontend: http://info.localhost
-- Backend: http://backend.info.localhost
+   > Veja a necessidade de alterar os valores das envs
+
+3. Inicie os containers usando Docker Compose:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+4. Acesse as aplicações:
+
+   - Frontend: http://info.localhost
+   - Backend: http://backend.info.localhost
 
 ## Scripts Úteis
 
@@ -67,6 +79,18 @@ Se encontrar problemas:
 
 1. Verifique se a porta 80 está disponível
 2. Certifique-se de que os domínios `info.localhost` e `backend.info.localhost` estão configurados no seu arquivo hosts
+
+   #### No linux ou Mac /etc/hosts
+
+   ```bash
+   127.0.0.1 info.localhost backend.info.localhost
+   ```
+
+   #### No Windows
+
+   Siga as instruções do Technoblog [Como editar o arquivo hosts no Windows
+   ](https://tecnoblog.net/responde/editar-arquivo-hosts-windows/)
+
 3. Verifique os logs dos containers para mais detalhes
 
 ## Sobre Backend e Frontend
